@@ -134,8 +134,10 @@ float positionX=0, positionY=0;
         positionX=mouseX;
         positionY=mouseY;
       }
+     if(mousePressed){
+      line(positionX, positionY, pmouseX, pmouseY);
+     }
      
-     line(positionX, positionY, pmouseX, pmouseY);
    }
    
    if (linea==3){
