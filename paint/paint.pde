@@ -1,11 +1,16 @@
+
+
 int grosor=30; // variable grosor
 int linea= 0; // forma pincelint linea= ; // forma pincel
 int color1=1; // color del pincel
 //int color2= 1; // color fondo
 
-float positionX=0, positionY=0;
+float positionX1=0, positionY1=0;
+
+float positionX2, positionY2;
 
  void setup (){
+ rectMode(RADIUS);
  background (250);
  size (1000, 1000);
  
@@ -114,40 +119,54 @@ float positionX=0, positionY=0;
         fill (190,50, 125);
         stroke(0);
       }
+   }
     
     
-    if (linea==1){
+   if (linea==1){
       stroke(0);
       fill(255);
   
       if(mouseButton == LEFT){
-        positionX=mouseX;
-        positionY=mouseY;
+        positionX1=mouseX;
+        positionY1=mouseY;
       }
       
-      ellipse (pmouseX,pmouseY, DistanceCircle(mouseX,mouseY,positionX,positionY), DistanceCircle(mouseX,mouseY,positionX,positionY));
+      ellipse (positionX1,positionY1, DistanceCircle(mouseX,mouseY,positionX1,positionY1), DistanceCircle(mouseX,mouseY,positionX1,positionY1));
    }
 
+   //linea
    if (linea==2){
-     
      if(mouseButton == LEFT){
-        positionX=mouseX;
-        positionY=mouseY;
+        positionX1=mouseX;
+        positionY1=mouseY;
       }
-     if(mousePressed){
-      line(positionX, positionY, pmouseX, pmouseY);
-     }
+      if(mouseButton == RIGHT){
+        positionX2=mouseX;
+        positionY2=mouseY;
+   }
+     
+     
+      line(positionX1, positionY1, mouseX, mouseY);
+     
      
    }
    
+   //pixels
    if (linea==3){
     
      point(mouseX, mouseY);
    }
-   if (linea==4){
-    
-   rect (mouseX,mouseY, grosor, grosor);
+   
+   //cuadrado
+   if (linea==4){ 
+     if(mouseButton == LEFT){
+        positionX1=mouseX;
+        positionY1=mouseY;
+      }
+      
+      rect (positionX1,positionY1, DistanceCircle(mouseX,mouseY,positionX1,positionY1), DistanceCircle(mouseX,mouseY,positionX1,positionY1));
    }
+   
    
     if (linea==5){
       stroke(0);
@@ -211,7 +230,7 @@ float positionX=0, positionY=0;
    
    
    }
-   }
+   
 
 //   }
 
@@ -219,13 +238,13 @@ float positionX=0, positionY=0;
  float DistanceCircle(float  distanceX1, float distanceY1,float  distanceX2, float distanceY2){
   float tDistanceX, tDistanceY;
   
-  tDistanceX=distanceX1 - distanceX2;
-  tDistanceY=distanceY1 - distanceY2;
+ tDistanceX=distanceX1 - distanceX2;
+ tDistanceY=distanceY1 - distanceY2;
   
-  if (tDistanceX > tDistanceY){
-    return tDistanceX;
+  if (abs(tDistanceX) > abs(tDistanceY)){
+    return abs(tDistanceX);
   } else{
-    return tDistanceY;
+    return abs(tDistanceY);
   }
   
 }
